@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Disease Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/static/heart.webp');/* Replace with your preferred image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        label, input, select {
+            width: 100%;
+        }
+
+        button {
+            grid-column: span 2;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Heart Disease Prediction</h1>
+        <form method="POST" action="/predict">
+            <label>Age:</label><input type="number" name="Age" required>
+            <label>Sex:</label>
+            <select name="Sex" required>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+
+            <label>Chest Pain Type:</label>
+            <select name="ChestPainType" required>
+                <option value="ATA">ATA</option>
+                <option value="NAP">NAP</option>
+                <option value="ASY">ASY</option>
+                <option value="TA">TA</option>
+            </select>
+
+            <label>Resting BP:</label><input type="number" name="RestingBP" required>
+            <label>Cholesterol:</label><input type="number" name="Cholesterol" required>
+            <label>FastingBS (0 or 1):</label><input type="number" name="FastingBS" required>
+
+            <label>Resting ECG:</label>
+            <select name="RestingECG" required>
+                <option value="Normal">Normal</option>
+                <option value="ST">ST</option>
+                <option value="LVH">LVH</option>
+            </select>
+
+            <label>Max HR:</label><input type="number" name="MaxHR" required>
+            <label>Exercise Angina:</label>
+            <select name="ExerciseAngina" required>
+                <option value="N">No</option>
+                <option value="Y">Yes</option>
+            </select>
+
+            <label>Oldpeak:</label><input type="number" step="0.1" name="Oldpeak" required>
+            <label>ST Slope:</label>
+            <select name="ST_Slope" required>
+                <option value="Up">Up</option>
+                <option value="Flat">Flat</option>
+                <option value="Down">Down</option>
+            </select>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                <p>{{ prediction_text }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
